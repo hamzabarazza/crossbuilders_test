@@ -2,9 +2,61 @@
 <html>
 
 <body>
+    <h1>Einkaufsliste</h1>
+    <label>
+        <input type="checkbox" name="zucker" value="Zucker">
+        Zucker
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" name="mehl" value="Mehl">
+        Mehl
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" name="eier" value="Eier">
+        Eier
+    </label>
+    <br>
 
-    <h1>Hello World!</h1>
+    <p>
+        Eingekauft: <span id="checkedOptions"></span>
+    </p>
 
+    <button id="selectAllButton">Alles erledigt!</button>
+    <button id="clearAllButton">Liste leeren</button>
 </body>
+
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkedOptionsElement = document.getElementById('checkedOptions');
+    const selectAllButton = document.getElementById('selectAllButton');
+    const clearAllButton = document.getElementById('clearAllButton');
+
+    function updateCheckedOptions() {
+        const checkedOptions = Array.from(checkboxes)
+            .filter((checkbox) => checkbox.checked)
+            .map((checkbox) => checkbox.value);
+
+        checkedOptionsElement.textContent = checkedOptions.join(', ');
+    }
+
+    function selectAllCheckboxes() {
+        checkboxes.forEach((checkbox) => (checkbox.checked = true));
+        updateCheckedOptions();
+    }
+
+    function clearAllCheckboxes() {
+        checkboxes.forEach((checkbox) => (checkbox.checked = false));
+        updateCheckedOptions();
+    }
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', updateCheckedOptions);
+    });
+
+    selectAllButton.addEventListener('click', selectAllCheckboxes);
+    clearAllButton.addEventListener('click', clearAllCheckboxes);
+</script>
 
 </html>
