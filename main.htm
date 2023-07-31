@@ -18,14 +18,20 @@
         Eier
     </label>
     <br>
+
     <p>
         Eingekauft: <span id="checkedOptions"></span>
     </p>
+
+    <button id="selectAllButton">Alles erledigt!</button>
+    <button id="clearAllButton">Liste leeren</button>
 </body>
 
 <script>
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const checkedOptionsElement = document.getElementById('checkedOptions');
+    const selectAllButton = document.getElementById('selectAllButton');
+    const clearAllButton = document.getElementById('clearAllButton');
 
     function updateCheckedOptions() {
         const checkedOptions = Array.from(checkboxes)
@@ -35,9 +41,22 @@
         checkedOptionsElement.textContent = checkedOptions.join(', ');
     }
 
+    function selectAllCheckboxes() {
+        checkboxes.forEach((checkbox) => (checkbox.checked = true));
+        updateCheckedOptions();
+    }
+
+    function clearAllCheckboxes() {
+        checkboxes.forEach((checkbox) => (checkbox.checked = false));
+        updateCheckedOptions();
+    }
+
     checkboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', updateCheckedOptions);
     });
+
+    selectAllButton.addEventListener('click', selectAllCheckboxes);
+    clearAllButton.addEventListener('click', clearAllCheckboxes);
 </script>
 
 </html>
