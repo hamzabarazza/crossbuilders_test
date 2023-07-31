@@ -18,6 +18,26 @@
         Eier
     </label>
     <br>
+    <p>
+        Eingekauft: <span id="checkedOptions"></span>
+    </p>
 </body>
+
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkedOptionsElement = document.getElementById('checkedOptions');
+
+    function updateCheckedOptions() {
+        const checkedOptions = Array.from(checkboxes)
+            .filter((checkbox) => checkbox.checked)
+            .map((checkbox) => checkbox.value);
+
+        checkedOptionsElement.textContent = checkedOptions.join(', ');
+    }
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', updateCheckedOptions);
+    });
+</script>
 
 </html>
